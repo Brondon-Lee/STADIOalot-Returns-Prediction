@@ -34,3 +34,28 @@ The repository has been structured to keep the different parts of the project or
 - **scripts/visualisation/** – Contains scripts used to create graphs and visualisations from the data and model results.
 - **notebooks/** – Contains Jupyter notebooks used for data exploration, analysis and testing ideas.
 - **reports/** – Contains project reports and supporting documents, including the Data Request report.
+
+## RAAIDD Log
+
+The RAAIDD log will be used throughout the project to keep track of risks, actions, assumptions, issues, decisions and dependencies that could affect the STADIOalot product returns prediction project.
+
+| RAAIDD | Description |
+|---|---|
+| **Risk 1** | Product categories may be inconsistent across the catalogue, which could make it difficult to accurately compare return patterns between similar products. |
+| **Risk 2** | Missing or unreliable seller information could affect the accuracy of the machine learning model, especially if seller performance is an important predictor of returns. |
+| **Risk 3** | The number of returned and non-returned items may be unbalanced, which could cause the model to perform well on the majority class while struggling to identify returned items. |
+| **Risk 4** | Historical return patterns may change over time as customer behaviour, products, sellers and business processes change, which could reduce the performance of the model on newer orders. |
+| **Action 1** | Inspect the datasets for missing values, duplicates, incorrect data types and inconsistent values before starting the modelling process. |
+| **Action 2** | Combine the order, product, return and seller datasets using common identifiers such as Order_ID, Order_Item_ID, SKU and Seller_ID. |
+| **Action 3** | Perform exploratory data analysis to identify which products, categories, sellers and customer buying patterns are associated with higher return rates. |
+| **Action 4** | Train and compare different machine learning models and evaluate how well they identify items that are likely to be returned. |
+| **Assumption 1** | Order and return records can be linked using consistent identifiers such as Order_ID and Order_Item_ID. |
+| **Assumption 2** | The historical data provided is reasonably representative of the types of orders and returns the business currently experiences. |
+| **Assumption 3** | Return reason codes are recorded consistently enough to support meaningful analysis of why products are returned. |
+| **Assumption 4** | Enough historical examples of returned and non-returned items are available to train and evaluate a machine learning model. |
+| **Issue** | No project issues have been identified at this early stage because the actual datasets have not yet been received. Data quality and integration issues may be identified once the data is provided and explored. |
+| **Decision** | The project will focus on predicting returns at individual order-item level rather than predicting whether an entire customer order will be returned, because individual items within the same order may have different products, sellers and return outcomes. |
+| **Dependency 1** | Data exploration can only begin once the required historical datasets have been received and made available for the project. |
+| **Dependency 2** | The datasets must be successfully linked using common identifiers before the complete modelling dataset can be created. |
+| **Dependency 3** | Data cleaning and preprocessing must be completed before reliable exploratory analysis and model training can take place. |
+| **Dependency 4** | Machine learning model development depends on the target variable being created correctly by identifying which order items were returned and which were not returned. |
