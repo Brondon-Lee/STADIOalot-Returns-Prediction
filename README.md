@@ -18,3 +18,19 @@ The information provided by STADIOalot suggests that some returns may be predict
 The problem this project aims to solve is therefore to determine whether STADIOalot's historical data can be used to identify the main factors that contribute to product returns and predict the likelihood of an item being returned. A machine learning model will be developed using information such as previous orders, product details, seller information, customer purchasing patterns and historical returns.
 The model would classify orders according to their likelihood of being returned. The results could then help STADIOalot identify higher-risk orders and understand the factors that are contributing to returns. This information could support actions such as improving product descriptions, providing better sizing information or identifying products and sellers that continuously experience high return rates.
 The overall aim of the project is to use STADIOalot's existing data to support earlier and more informed decisions that could reduce avoidable product returns and the costs associated with them.
+
+## Repository Structure
+
+The repository has been structured to keep the different parts of the project organised and make it easier to manage the data, code, models, experiments and reports throughout the project.
+
+- **data/raw/** – Contains the original datasets received for the project. The raw data will be kept unchanged.
+- **data/processed/** – Contains datasets that have been cleaned and prepared for analysis and machine learning.
+- **models/** – Contains the machine learning models developed and saved during the project.
+- **experiments/setup/** – Contains the setup and configuration used for the different experiments.
+- **experiments/results/** – Contains the results of experiments and model comparisons.
+- **scripts/preprocessing/** – Contains scripts used to clean and prepare the data.
+- **scripts/statistical_analysis/** – Contains statistical helper and comparison scripts used to analyse the data and compare results.
+- **scripts/modelling/** – Contains scripts used to train, test and evaluate the machine learning models.
+- **scripts/visualisation/** – Contains scripts used to create graphs and visualisations from the data and model results.
+- **notebooks/** – Contains Jupyter notebooks used for data exploration, analysis and testing ideas.
+- **reports/** – Contains project reports and supporting documents, including the Data Request report.
