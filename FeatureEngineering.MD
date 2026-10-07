@@ -14,7 +14,7 @@ The target variable is `target`, where:
 * `0` = Negative Outcome
 * `1` = Positive Outcome
 
-The target was created during preprocessing using the customer review score, where review scores of 1 or 2 were classified as a Negative Outcome and review scores of 3, 4 or 5 were classified as a Positive Outcome.
+The target was created during preprocessing using the customer review score. Review scores of 1 or 2 were classified as a Negative Outcome, while review scores of 3, 4 or 5 were classified as a Positive Outcome.
 
 ---
 
@@ -22,9 +22,9 @@ The target was created during preprocessing using the customer review score, whe
 
 The notebook associated with this stage is:
 
-**`FeatureEngineering.ipynb`**
+**`notebooks/FeatureEngineering.ipynb`**
 
-The notebook contains the Python code used to perform the feature engineering, train/test split and machine learning preprocessing.
+The notebook contains the Python code used to perform the feature preparation, train/test split and machine learning preprocessing.
 
 ---
 
@@ -34,14 +34,8 @@ The feature engineering notebook uses the processed dataset created by `Preproce
 
 Input file:
 
-```text
+```text id="0yoh2r"
 processed_olist.csv
-```
-
-Expected location used during development:
-
-```text
-C:\Users\w7127363\Downloads\processed_olist.csv
 ```
 
 The processed dataset contains:
@@ -55,7 +49,7 @@ The target variable is separated from the predictor variables before further pro
 
 ## 4. Separating Features and Target
 
-The target variable is separated from the input features using the following approach:
+The target variable is separated from the input features using:
 
 ```python
 X = data.drop(columns=["target"])
@@ -69,18 +63,20 @@ This produces:
 
 The target distribution is imbalanced:
 
-| Target | Description      | Observations |
-| ------ | ---------------- | -----------: |
-| 0      | Negative Outcome |       14,575 |
-| 1      | Positive Outcome |       84,649 |
+| **Target** | **Description**  | **Observations** |
+| ---------- | ---------------- | ---------------- |
+| 0          | Negative Outcome | 14,575           |
+| 1          | Positive Outcome | 84,649           |
 
-This imbalance is considered when interpreting the model results.
+This class imbalance is considered when interpreting the model results.
 
 ---
 
 ## 5. Identifying Numerical and Categorical Features
 
 The predictor variables were separated into numerical and categorical features.
+
+### Numerical Features
 
 The numerical variables include:
 
@@ -100,6 +96,8 @@ The numerical variables include:
 * `delivery_days`
 * `delivery_delay_days`
 * `delivery_missing`
+
+### Categorical Features
 
 The categorical variables include:
 
@@ -123,7 +121,7 @@ X["seller_zip_code"] = (
 )
 ```
 
-This prevents the machine learning models from interpreting postal codes as quantities where the difference between two codes has numerical meaning.
+This prevents the machine learning models from interpreting postal codes as quantities where the numerical difference between two postal codes has meaningful mathematical interpretation.
 
 ---
 
@@ -152,10 +150,10 @@ Stratification was used to maintain a similar proportion of Positive and Negativ
 
 The resulting datasets were:
 
-| Dataset  | Observations | Features |
-| -------- | -----------: | -------: |
-| Training |       79,379 |       23 |
-| Testing  |       19,845 |       23 |
+| **Dataset** | **Observations** | **Features** |
+| ----------- | ---------------- | ------------ |
+| Training    | 79,379           | 23           |
+| Testing     | 19,845           | 23           |
 
 The target distributions were:
 
@@ -196,9 +194,9 @@ numeric_pipeline = Pipeline([
 ])
 ```
 
-Median imputation was selected because it provides a simple way of handling missing numerical values while being less affected by extreme values than the mean.
+Median imputation was selected because it provides a simple method of handling missing numerical values and is less affected by extreme values than mean imputation.
 
-Standardisation was applied because Logistic Regression benefits from numerical variables being placed on comparable scales.
+Standardisation was applied because Logistic Regression can benefit from numerical variables being placed on comparable scales.
 
 ---
 
@@ -227,7 +225,7 @@ categorical_pipeline = Pipeline([
 ])
 ```
 
-The `handle_unknown="ignore"` setting allows the models to process categories that may occur in the testing data but were not present in the training data.
+The `handle_unknown="ignore"` setting allows the preprocessing pipeline to handle categories that may occur in the testing data but were not present in the training data.
 
 ---
 
@@ -254,7 +252,9 @@ The same fitted transformations were then applied to the testing data:
 X_test_processed = preprocessor.transform(X_test)
 ```
 
-This approach prevents information from the testing dataset being used when learning the preprocessing transformations.
+This prevents information from the testing dataset being used when learning the preprocessing transformations.
+
+The same preprocessing approach is therefore applied consistently to both machine learning models.
 
 ---
 
@@ -264,7 +264,7 @@ After imputation, standardisation and one-hot encoding, the number of features i
 
 The final dimensions were:
 
-```text
+```text id="9gj8xm"
 Training data: (79379, 20955)
 Testing data:  (19845, 20955)
 ```
@@ -273,10 +273,10 @@ Therefore, the original 23 predictor variables were transformed into **20,955 ma
 
 The increase was mainly caused by high-cardinality categorical variables such as:
 
-* customer city
-* seller city
-* customer postal code
-* seller postal code
+* Customer city
+* Seller city
+* Customer postal code
+* Seller postal code
 
 The transformed datasets were stored as sparse matrices to reduce memory usage.
 
@@ -288,26 +288,22 @@ After the preprocessing pipeline was applied, the transformed datasets were chec
 
 The result was:
 
-```text
+```text id="1nljjr"
 Missing values in processed training data: 0
 Missing values in processed testing data: 0
 ```
 
-This confirms that the preprocessing pipeline successfully handled the missing values.
+This confirms that the preprocessing pipeline successfully handled the missing values before model training.
 
 ---
 
 ## 12. Output Files
 
-The feature-engineered datasets were saved in the following folder:
-
-```text
-C:\Users\w7127363\Downloads\feature_engineered\
-```
+The feature-engineered datasets were saved in a `feature_engineered` output folder.
 
 The following files were created:
 
-```text
+```text id="a7m9jd"
 X_train.npz
 X_test.npz
 y_train.csv
@@ -318,10 +314,10 @@ The `.npz` files contain the sparse feature matrices, while the CSV files contai
 
 These files are then used by:
 
-* `Model1.ipynb`
-* `Model2.ipynb`
+* `notebooks/Model1.ipynb`
+* `notebooks/Model2.ipynb`
 
-This allows the modelling notebooks to use the same feature-engineered training and testing data.
+This ensures that both models use the same feature-engineered training and testing data.
 
 ---
 
@@ -329,16 +325,19 @@ This allows the modelling notebooks to use the same feature-engineered training 
 
 To reproduce the feature engineering process:
 
-1. Ensure that `processed_olist.csv` has been created by running `Preprocessing.ipynb`.
-2. Open `FeatureEngineering.ipynb`.
+1. Ensure that `processed_olist.csv` has been created by running `notebooks/Preprocessing.ipynb`.
+2. Open `notebooks/FeatureEngineering.ipynb`.
 3. Update the input file path if the dataset is stored in a different location.
-4. Run the notebook cells from the beginning to the end.
+4. Run the notebook cells from beginning to end.
 5. The notebook will separate the target from the predictors.
-6. The categorical and numerical variables will be identified.
+6. The numerical and categorical variables will be identified.
 7. The dataset will be divided into training and testing sets.
 8. The preprocessing pipeline will perform imputation, one-hot encoding and numerical standardisation.
-9. The processed datasets will be saved to the `feature_engineered` folder.
-10. The resulting files can then be used by `Model1.ipynb` and `Model2.ipynb`.
+9. The processed datasets will be saved as sparse matrices.
+10. The target datasets will be saved as CSV files.
+11. The resulting files can then be used by `notebooks/Model1.ipynb` and `notebooks/Model2.ipynb`.
+
+The notebook should be run from the first cell to the final cell to reproduce the feature engineering process.
 
 ---
 
@@ -347,9 +346,9 @@ To reproduce the feature engineering process:
 The feature engineering process uses:
 
 * Python 3.13.9
-* Pandas
-* NumPy
-* Scikit-learn
+* Pandas 2.3.3
+* NumPy 2.3.5
+* Scikit-learn 1.7.2
 * SciPy
 * Jupyter Notebook
 
@@ -366,8 +365,23 @@ The main Scikit-learn techniques used are:
 
 ## 15. Summary
 
-The feature engineering stage converts the preprocessed Olist dataset into a format suitable for machine learning. Numerical variables are imputed and standardised, while categorical variables are imputed and one-hot encoded.
+The feature engineering stage converts the preprocessed Olist dataset into a format suitable for machine learning.
 
-An 80/20 stratified train/test split was used to maintain the target distribution. The final feature-engineered data contains 79,379 training observations and 19,845 testing observations, with 20,955 transformed features.
+The main techniques include:
 
-The resulting training and testing datasets are saved as sparse matrices and are used as the input for the Logistic Regression and Random Forest models.
+* Separating predictor variables and the target
+* Identifying numerical and categorical variables
+* Converting postal codes to categorical variables
+* Stratified 80/20 train/test splitting
+* Median imputation for numerical variables
+* Most-frequent imputation for categorical variables
+* One-hot encoding of categorical variables
+* Standardisation of numerical variables
+* Preventing test-data leakage by fitting transformations only on training data
+* Storing the transformed data as sparse matrices
+
+The final feature-engineered data contains **79,379 training observations and 19,845 testing observations**, with **20,955 transformed features**.
+
+The resulting training and testing datasets are used as the input for the Logistic Regression and Random Forest models.
+
+**Related notebook:** `notebooks/FeatureEngineering.ipynb`
