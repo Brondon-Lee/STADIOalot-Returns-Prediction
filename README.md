@@ -304,10 +304,16 @@ STADIOalot-Returns-Prediction/
 │   └── random_forest_model.pkl
 │
 ├── notebooks/
-│   ├── Preprocessing.ipynb
-│   ├── FeatureEngineering.ipynb
-│   ├── Model1.ipynb
-│   └── Model2.ipynb
+├── Preprocessing.MD
+├── FeatureEngineering.MD
+├── Model1.MD
+├── Model2.MD
+├── Model1Performance.MD
+├── Model2Performance.MD
+├── Comparison.MD
+├── README.md
+├── Requirements.txt
+└── .gitignore
 │
 ├── reports/
 │
