@@ -14,7 +14,7 @@ The preprocessing stage prepares the data for the feature engineering stage.
 
 The notebook associated with this stage is:
 
-**`Preprocessing.ipynb`**
+**`notebooks/Preprocessing.ipynb`**
 
 The notebook contains the Python code used to load, inspect, merge and clean the Olist datasets and create the target variable.
 
@@ -40,15 +40,15 @@ The datasets are loaded into Pandas DataFrames using `pandas.read_csv()`.
 
 The main datasets and their original sizes were:
 
-| Dataset     | Observations | Columns |
-| ----------- | -----------: | ------: |
-| Orders      |       99,441 |       8 |
-| Reviews     |       99,224 |       7 |
-| Order Items |      112,650 |       7 |
-| Products    |       32,951 |       9 |
-| Customers   |       99,441 |       5 |
-| Sellers     |        3,095 |       4 |
-| Payments    |      103,886 |       5 |
+| **Dataset** | **Observations** | **Columns** |
+| ----------- | ---------------- | ----------- |
+| Orders      | 99,441           | 8           |
+| Reviews     | 99,224           | 7           |
+| Order Items | 112,650          | 7           |
+| Products    | 32,951           | 9           |
+| Customers   | 99,441           | 5           |
+| Sellers     | 3,095            | 4           |
+| Payments    | 103,886          | 5           |
 
 ---
 
@@ -69,9 +69,9 @@ Missing values were identified in several columns, particularly delivery dates, 
 
 ## 6. Date Conversion
 
-Date fields were converted to the appropriate datetime format using Pandas.
+The relevant order date fields were converted to the appropriate datetime format using Pandas.
 
-The following order date columns were converted:
+The following columns were converted:
 
 * `order_purchase_timestamp`
 * `order_approved_at`
@@ -79,9 +79,7 @@ The following order date columns were converted:
 * `order_delivered_customer_date`
 * `order_estimated_delivery_date`
 
-Review dates and the order-item shipping limit date were also converted to datetime format.
-
-Invalid date values were converted to missing values using `errors="coerce"`.
+Invalid date values were converted to missing values where applicable.
 
 ---
 
@@ -98,13 +96,15 @@ The main identifiers used during the merging process were:
 
 Orders and reviews were first combined using `order_id`.
 
-Order items and product information were then summarised at order level and merged with the main dataset.
+Order-item and product information were then combined and summarised at order level before being merged with the main dataset.
 
-Payment information was also summarised by order.
+Payment information was summarised by order.
 
 Customer information was joined using `customer_id`.
 
-Seller information was summarised at order level and then joined to the main dataset.
+Seller information was combined with order-item information and summarised at order level before being joined to the main dataset.
+
+The resulting dataset was maintained at approximately one row per reviewed order.
 
 ---
 
@@ -114,19 +114,21 @@ A binary target variable was created from the customer review score.
 
 The target definition was:
 
-| Review Score | Target | Outcome          |
-| ------------ | -----: | ---------------- |
-| 1–2          |      0 | Negative Outcome |
-| 3–5          |      1 | Positive Outcome |
+| **Review Score** | **Target** | **Outcome**      |
+| ---------------- | ---------- | ---------------- |
+| 1–2              | 0          | Negative Outcome |
+| 3–5              | 1          | Positive Outcome |
 
 The target distribution was:
 
-| Target               | Observations | Proportion |
-| -------------------- | -----------: | ---------: |
-| 0 – Negative Outcome |       14,575 |     14.69% |
-| 1 – Positive Outcome |       84,649 |     85.31% |
+| **Target**           | **Observations** | **Proportion** |
+| -------------------- | ---------------- | -------------- |
+| 0 – Negative Outcome | 14,575           | 14.69%         |
+| 1 – Positive Outcome | 84,649           | 85.31%         |
 
 The target is therefore imbalanced, with Positive Outcome representing the majority class.
+
+It is important to note that the Olist dataset does not contain a direct product-return variable. The review-score classification is therefore used as a **proxy target for the Part B proof of concept**.
 
 ---
 
@@ -210,9 +212,9 @@ Unknown
 
 Missing `order_approved_at` values were replaced using the corresponding `order_purchase_timestamp`.
 
-Delivery-related missing values were retained because they were used to create the `delivery_missing` feature.
+Delivery-related missing values were retained so that the `delivery_missing` feature could capture whether a delivery date was unavailable.
 
-The remaining missing delivery information is handled later during the feature engineering stage using the machine learning preprocessing pipeline.
+Additional missing-value handling is performed later during feature engineering using the machine learning preprocessing pipeline. The feature engineering pipeline applies median imputation to numerical features and most-frequent imputation to categorical features.
 
 ---
 
@@ -232,9 +234,13 @@ These included:
 * `order_delivered_customer_date`
 * `order_estimated_delivery_date`
 
-The review score was removed because it was used to create the target variable.
+The `review_score` was removed because it was used to create the target variable.
 
-Identifiers and raw date fields were removed because they are not required as direct model inputs and could introduce unnecessary information or potential data leakage.
+Identifier columns were removed because they do not provide useful direct predictive information for the modelling task.
+
+Raw date columns were removed after the relevant delivery features had been created.
+
+Removing these columns also prevents information that should not be directly available as model features from being used during modelling.
 
 ---
 
@@ -247,15 +253,11 @@ After preprocessing, the final dataset contained:
 24 columns
 ```
 
-The final dataset contained:
+The final dataset consisted of:
 
-* The binary target variable
-* Order information
-* Product information
-* Payment information
-* Customer information
-* Seller information
-* Delivery-related variables
+* 1 binary target variable
+* 16 numerical modelling features
+* 7 categorical modelling features
 
 The final dataset was saved as:
 
@@ -263,11 +265,7 @@ The final dataset was saved as:
 processed_olist.csv
 ```
 
-The file was saved during development to:
-
-```text
-C:\Users\w7127363\Downloads\processed_olist.csv
-```
+This processed dataset is used as the input for the feature engineering stage.
 
 ---
 
@@ -281,9 +279,17 @@ The final processed dataset was checked for:
 * Data types
 * Missing values
 
-The final dataset contained 520 rows that were identical across the remaining modelling columns after identifiers and raw date fields had been removed.
+The final dataset contained **520 rows that were identical across the remaining modelling columns** after identifiers and raw date fields had been removed.
 
-These were not duplicate rows in the original source datasets. They resulted from different orders becoming identical across the retained modelling features. They were therefore retained.
+These were not duplicate rows in the original source datasets. They resulted from different orders becoming identical across the retained modelling features.
+
+The rows were therefore retained rather than arbitrarily removing potentially valid observations.
+
+The final dataset shape was:
+
+```text
+(99,224, 24)
+```
 
 ---
 
@@ -292,8 +298,8 @@ These were not duplicate rows in the original source datasets. They resulted fro
 To reproduce the preprocessing process:
 
 1. Place all seven raw Olist CSV files in the required input folder.
-2. Open `Preprocessing.ipynb`.
-3. Update the file paths if the datasets are stored in a different location.
+2. Open `notebooks/Preprocessing.ipynb`.
+3. Update the file paths in the notebook if the datasets are stored in a different location.
 4. Run the notebook cells from beginning to end.
 5. The notebook will load and inspect the datasets.
 6. The datasets will be merged using their relevant identifiers.
@@ -301,9 +307,9 @@ To reproduce the preprocessing process:
 8. Order-level and delivery-related variables will be created.
 9. The binary target variable will be created from the review score.
 10. Missing values will be handled.
-11. Unnecessary and leakage-prone columns will be removed.
+11. Unnecessary identifiers and raw date columns will be removed.
 12. The processed dataset will be saved as `processed_olist.csv`.
-13. The resulting file can then be used by `FeatureEngineering.ipynb`.
+13. The resulting file can then be used by `notebooks/FeatureEngineering.ipynb`.
 
 The notebook should be run from the first cell to the final cell to reproduce the preprocessing process.
 
@@ -314,7 +320,7 @@ The notebook should be run from the first cell to the final cell to reproduce th
 The preprocessing stage was developed using:
 
 * Python 3.13.9
-* Pandas
+* Pandas 2.3.3
 * Jupyter Notebook
 
 ---
@@ -333,8 +339,9 @@ The main preprocessing techniques include:
 * Order-level aggregation
 * Delivery feature creation
 * Binary target creation
-* Removal of unnecessary and leakage-prone variables
+* Removal of identifiers and raw date variables
+* Final dataset validation
 
 The resulting dataset contains **99,224 observations and 24 columns** and is saved as `processed_olist.csv`.
 
-**Related notebook:** `Preprocessing.ipynb`
+**Related notebook:** `notebooks/Preprocessing.ipynb`
