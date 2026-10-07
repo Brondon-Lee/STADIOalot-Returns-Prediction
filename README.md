@@ -140,7 +140,7 @@ Two classification models were developed and evaluated.
 
 The Logistic Regression model achieved an accuracy of **88.05%** and a ROC-AUC of **78.25%**.
 
-The model performed well at identifying positive outcomes, with a recall of **97.84%** for the positive class. However, its recall for the negative class was only **31%**, showing that the class imbalance made it difficult to identify negative outcomes.
+The model performed well at identifying positive outcomes, with a recall of **97.84%** for the positive class. However, its recall for the negative class was only approximately **31%**, showing that the class imbalance made it difficult to identify negative outcomes.
 
 The confusion matrix was:
 
@@ -167,6 +167,7 @@ This means that the Random Forest model correctly identified all positive outcom
 Therefore, the 85.31% accuracy should not be interpreted as evidence that the model performs well. It is approximately equal to the proportion of the majority class in the dataset.
 
 Based on the current results, Logistic Regression performed better than the Random Forest model and was more useful for identifying the minority negative class.
+
 # Part C – Model Performance and Comparison
 
 ## Purpose
@@ -190,21 +191,21 @@ Because the target variable is imbalanced, with 85.31% of observations classifie
 
 The Logistic Regression model achieved the following results:
 
-| **Metric** | **Score** |
-| ---------- | --------: |
-| Accuracy   |    88.05% |
-| Precision  |    89.19% |
-| Recall     |    97.84% |
-| F1 Score   |    93.32% |
-| ROC-AUC    |    78.25% |
+| Metric    |  Score |
+| --------- | -----: |
+| Accuracy  | 88.05% |
+| Precision | 89.19% |
+| Recall    | 97.84% |
+| F1 Score  | 93.32% |
+| ROC-AUC   | 78.25% |
 
 The detailed Model 1 performance analysis is available in:
 
-[Model1Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model1Performance.MD)
+[Model1Performance.MD](Model1Performance.MD)
 
 The related executable notebook is:
 
-[Model1Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model1Performance.ipynb)
+[Model1Performance.ipynb](notebooks/Model1Performance.ipynb)
 
 The Logistic Regression model achieved the highest overall performance across most of the evaluation metrics. However, the model still struggled to identify the minority Negative Outcome class, with a recall of approximately 31% for that class.
 
@@ -212,21 +213,21 @@ The Logistic Regression model achieved the highest overall performance across mo
 
 The Random Forest model achieved the following results:
 
-| **Metric** | **Score** |
-| ---------- | --------: |
-| Accuracy   |    85.31% |
-| Precision  |    85.31% |
-| Recall     |   100.00% |
-| F1 Score   |    92.07% |
-| ROC-AUC    |    77.60% |
+| Metric    |   Score |
+| --------- | ------: |
+| Accuracy  |  85.31% |
+| Precision |  85.31% |
+| Recall    | 100.00% |
+| F1 Score  |  92.07% |
+| ROC-AUC   |  77.60% |
 
 The detailed Model 2 performance analysis is available in:
 
-[Model2Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model2Performance.MD)
+[Model2Performance.MD](Model2Performance.MD)
 
 The related executable notebook is:
 
-[Model2Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model2Performance.ipynb)
+[Model2Performance.ipynb](notebooks/Model2Performance.ipynb)
 
 Although the Random Forest achieved 100% recall for the positive class, further analysis showed that it predicted every observation as Positive Outcome. It therefore failed to identify any of the Negative Outcome observations.
 
@@ -236,21 +237,21 @@ This shows why accuracy and recall should be interpreted together with the confu
 
 The two models were evaluated using the same test dataset.
 
-| **Metric** | **Logistic Regression** | **Random Forest** |
-| ---------- | ----------------------: | ----------------: |
-| Accuracy   |              **88.05%** |            85.31% |
-| Precision  |              **89.19%** |            85.31% |
-| Recall     |                  97.84% |       **100.00%** |
-| F1 Score   |              **93.32%** |            92.07% |
-| ROC-AUC    |              **78.25%** |            77.60% |
+| Metric    | Logistic Regression | Random Forest |
+| --------- | ------------------: | ------------: |
+| Accuracy  |          **88.05%** |        85.31% |
+| Precision |          **89.19%** |        85.31% |
+| Recall    |              97.84% |   **100.00%** |
+| F1 Score  |          **93.32%** |        92.07% |
+| ROC-AUC   |          **78.25%** |        77.60% |
 
 The detailed comparison is available in:
 
-[Comparison.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Comparison.MD)
+[Comparison.MD](Comparison.MD)
 
 The related executable notebook is:
 
-[Comparison.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Comparison.ipynb)
+[Comparison.ipynb](notebooks/Comparison.ipynb)
 
 ### Comparison Conclusion
 
@@ -270,9 +271,9 @@ However, the results also show that further work is required to improve the iden
 
 The executable notebooks used for the Part C analysis are stored in the `notebooks/` folder:
 
-* [Model1Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model1Performance.ipynb)
-* [Model2Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model2Performance.ipynb)
-* [Comparison.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Comparison.ipynb)
+* [Model1Performance.ipynb](notebooks/Model1Performance.ipynb)
+* [Model2Performance.ipynb](notebooks/Model2Performance.ipynb)
+* [Comparison.ipynb](notebooks/Comparison.ipynb)
 
 The Part C notebooks load the trained models and the unseen test dataset, generate predictions and calculate the required performance metrics.
 
@@ -280,13 +281,81 @@ The Part C notebooks load the trained models and the unseen test dataset, genera
 
 The supporting Part C documentation is stored in the repository root:
 
-* [Model1Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model1Performance.MD)
-* [Model2Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model2Performance.MD)
-* [Comparison.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Comparison.MD)
+* [Model1Performance.MD](Model1Performance.MD)
+* [Model2Performance.MD](Model2Performance.MD)
+* [Comparison.MD](Comparison.MD)
+
+# Part D – Recommendations Report
+
+## Purpose
+
+Part D provides recommendations based on the model performance and comparison results from Part C.
+
+The report answers the following questions:
+
+1. Which model is best between Model 1 and Model 2?
+2. How can the selected model be improved?
+3. How will the selected model need to be adapted to work with the STADIOalot data requested in SS1?
+4. Do the results align with the related literature from Part A?
+
+The report also discusses the class imbalance found in the dataset and the limitation of using the Olist review score as a proxy outcome instead of an actual product-return outcome.
+
+## Recommended Model
+
+Logistic Regression was selected as the preferred model based on the overall results.
+
+It achieved higher accuracy, precision, F1 Score and ROC-AUC than Random Forest. Although Random Forest achieved 100% recall for the positive class, the confusion matrix showed that it predicted every observation as Positive Outcome and failed to identify any Negative Outcomes.
+
+## Model Improvements
+
+The selected Logistic Regression model could be improved by addressing the class imbalance and improving the available features.
+
+Possible improvements include:
+
+* Using class weighting or resampling techniques.
+* Adjusting the classification threshold.
+* Adding more relevant product, customer and transaction features.
+* Performing additional hyperparameter tuning.
+* Using cross-validation to provide more reliable performance estimates.
+* Investigating additional models such as Gradient Boosting.
+
+## Adaptation to STADIOalot Data
+
+The current proof of concept uses the Olist review score as a proxy target because the public dataset does not contain actual product-return information.
+
+When the model is applied to STADIOalot, the target variable should be replaced with the actual return outcome from the data requested in SS1.
+
+The model can then use appropriate information about:
+
+* Customers
+* Products
+* Orders
+* Sellers
+* Transactions
+* Delivery
+* Previous returns
+
+Care would also need to be taken to prevent data leakage. Only information that would have been available before the return occurs should be used when making the prediction.
+
+## Literature Alignment
+
+The results are generally consistent with the literature reviewed in Part A.
+
+Heilig et al. (2016) showed that machine learning and ensemble approaches can be used for product return prediction. Mishra and Dutta (2024) compared different machine learning models and highlighted the importance of product, order and transaction variables when predicting returns. Duong et al. (2025) also showed that product characteristics can be useful for understanding return behaviour and that interpretable machine learning can provide additional insight.
+
+The results from this project support the general idea that machine learning can be used to identify patterns in e-commerce customer behaviour.
+
+However, the results cannot be directly compared with studies that use actual product returns because the Olist proof-of-concept uses a review-score proxy. The final STADIOalot model should therefore be retrained and evaluated using actual return outcomes.
+
+## Part D Report
+
+The complete Part D Recommendations Report is available in the `reports/` folder:
+
+[PartD_Recommendations_Report.pdf](reports/PartD_Recommendations_Report.pdf)
 
 # Repository Structure
 
-The repository has been structured to keep the different parts of the project organised and make it easier to manage the data, code, models, experiments and reports throughout the project.
+The repository has been structured to keep the different parts of the project organised and make it easier to manage the data, code, models, experiments and reports.
 
 ```text
 STADIOalot-Returns-Prediction/
@@ -304,18 +373,16 @@ STADIOalot-Returns-Prediction/
 │   └── random_forest_model.pkl
 │
 ├── notebooks/
-├── Preprocessing.MD
-├── FeatureEngineering.MD
-├── Model1.MD
-├── Model2.MD
-├── Model1Performance.MD
-├── Model2Performance.MD
-├── Comparison.MD
-├── README.md
-├── Requirements.txt
-└── .gitignore
+│   ├── Preprocessing.ipynb
+│   ├── FeatureEngineering.ipynb
+│   ├── Model1.ipynb
+│   ├── Model2.ipynb
+│   ├── Model1Performance.ipynb
+│   ├── Model2Performance.ipynb
+│   └── Comparison.ipynb
 │
 ├── reports/
+│   └── PartD_Recommendations_Report.pdf
 │
 ├── scripts/
 │
@@ -323,6 +390,9 @@ STADIOalot-Returns-Prediction/
 ├── FeatureEngineering.MD
 ├── Model1.MD
 ├── Model2.MD
+├── Model1Performance.MD
+├── Model2Performance.MD
+├── Comparison.MD
 ├── README.md
 ├── Requirements.txt
 └── .gitignore
@@ -335,9 +405,9 @@ STADIOalot-Returns-Prediction/
 * **models/** – Contains trained machine learning models saved for later use.
 * **experiments/setup/** – Contains setup and configuration information used for experiments.
 * **experiments/results/** – Contains experimental results and model comparison results.
-* **scripts/** – Contains supporting Python scripts used throughout the project, including statistical analysis and visualisation scripts where applicable.
+* **scripts/** – Contains supporting Python scripts used throughout the project.
 * **notebooks/** – Contains Jupyter notebooks used for preprocessing, feature engineering and model development.
-* **reports/** – Contains project reports and supporting documents, including the Data Request report.
+* **reports/** – Contains project reports and supporting documents, including the Part D Recommendations Report.
 
 # Requirements
 
@@ -361,7 +431,7 @@ The main technologies used include:
 
 The RAAIDD log will be used throughout the project to keep track of risks, actions, assumptions, issues, decisions and dependencies that could affect the STADIOalot product returns prediction project.
 
-| **RAAIDD**       | **Description**                                                                                                                                                                          |
+| RAAIDD           | Description                                                                                                                                                                              |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Risk 1**       | Product categories may be inconsistent across the catalogue, which could make it difficult to accurately compare return patterns between similar products.                               |
 | **Risk 2**       | Missing or unreliable seller information could affect the accuracy of the machine learning model, especially if seller performance is an important predictor of returns.                 |
@@ -393,6 +463,10 @@ The project is being developed in stages.
 
 **SS1** established the business problem, motivation, data requirements, repository structure and RAAIDD log for the proposed STADIOalot product returns prediction project.
 
-**Part B** extends this work by demonstrating the proposed data science approach using a publicly available e-commerce dataset. The public dataset is used as a proof of concept before the approach can be applied to sensitive STADIOalot data.
+**Part B** extended this work by demonstrating the proposed data science approach using a publicly available e-commerce dataset. The public dataset was used as a proof of concept before the approach can be applied to sensitive STADIOalot data.
+
+**Part C** evaluated and compared the Logistic Regression and Random Forest models using multiple performance metrics and identified Logistic Regression as the preferred model.
+
+**Part D** provides recommendations based on the results from Part C, including possible model improvements, adaptation to the requested STADIOalot data and comparison with the literature reviewed in Part A.
 
 The future objective is to apply the validated approach to appropriate STADIOalot data containing actual product-return outcomes, subject to data availability and approval.
