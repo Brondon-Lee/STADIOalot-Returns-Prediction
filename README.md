@@ -167,6 +167,122 @@ This means that the Random Forest model correctly identified all positive outcom
 Therefore, the 85.31% accuracy should not be interpreted as evidence that the model performs well. It is approximately equal to the proportion of the majority class in the dataset.
 
 Based on the current results, Logistic Regression performed better than the Random Forest model and was more useful for identifying the minority negative class.
+# Part C – Model Performance and Comparison
+
+## Purpose
+
+Part C evaluates the performance of the two machine learning models developed in Part B using the unseen test dataset.
+
+The two models were evaluated using the same test data and multiple classification metrics to provide a fair comparison.
+
+The metrics used were:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* ROC-AUC
+* Confusion Matrix
+
+Because the target variable is imbalanced, with 85.31% of observations classified as Positive Outcome, accuracy was not considered on its own.
+
+## Model 1 Performance
+
+The Logistic Regression model achieved the following results:
+
+| **Metric** | **Score** |
+| ---------- | --------: |
+| Accuracy   |    88.05% |
+| Precision  |    89.19% |
+| Recall     |    97.84% |
+| F1 Score   |    93.32% |
+| ROC-AUC    |    78.25% |
+
+The detailed Model 1 performance analysis is available in:
+
+[Model1Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model1Performance.MD)
+
+The related executable notebook is:
+
+[Model1Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model1Performance.ipynb)
+
+The Logistic Regression model achieved the highest overall performance across most of the evaluation metrics. However, the model still struggled to identify the minority Negative Outcome class, with a recall of approximately 31% for that class.
+
+## Model 2 Performance
+
+The Random Forest model achieved the following results:
+
+| **Metric** | **Score** |
+| ---------- | --------: |
+| Accuracy   |    85.31% |
+| Precision  |    85.31% |
+| Recall     |   100.00% |
+| F1 Score   |    92.07% |
+| ROC-AUC    |    77.60% |
+
+The detailed Model 2 performance analysis is available in:
+
+[Model2Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model2Performance.MD)
+
+The related executable notebook is:
+
+[Model2Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model2Performance.ipynb)
+
+Although the Random Forest achieved 100% recall for the positive class, further analysis showed that it predicted every observation as Positive Outcome. It therefore failed to identify any of the Negative Outcome observations.
+
+This shows why accuracy and recall should be interpreted together with the confusion matrix and other performance metrics.
+
+## Model Comparison
+
+The two models were evaluated using the same test dataset.
+
+| **Metric** | **Logistic Regression** | **Random Forest** |
+| ---------- | ----------------------: | ----------------: |
+| Accuracy   |              **88.05%** |            85.31% |
+| Precision  |              **89.19%** |            85.31% |
+| Recall     |                  97.84% |       **100.00%** |
+| F1 Score   |              **93.32%** |            92.07% |
+| ROC-AUC    |              **78.25%** |            77.60% |
+
+The detailed comparison is available in:
+
+[Comparison.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Comparison.MD)
+
+The related executable notebook is:
+
+[Comparison.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Comparison.ipynb)
+
+### Comparison Conclusion
+
+Based on the results, **Logistic Regression performed better overall**.
+
+It achieved higher accuracy, precision, F1 Score and ROC-AUC than the Random Forest model. Although Random Forest achieved a higher recall score, this was because it classified every test observation as Positive Outcome.
+
+Logistic Regression was able to correctly identify some Negative Outcomes, while Random Forest identified none.
+
+The F1 Score also provides a useful comparison because it considers both precision and recall. Logistic Regression achieved an F1 Score of **93.32%**, compared with **92.07%** for Random Forest.
+
+Therefore, Logistic Regression is the preferred model from the two models tested in this proof-of-concept.
+
+However, the results also show that further work is required to improve the identification of Negative Outcomes. Future modelling could investigate class balancing, threshold adjustment and additional feature engineering.
+
+## Part C Notebooks
+
+The executable notebooks used for the Part C analysis are stored in the `notebooks/` folder:
+
+* [Model1Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model1Performance.ipynb)
+* [Model2Performance.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Model2Performance.ipynb)
+* [Comparison.ipynb](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/notebooks/Comparison.ipynb)
+
+The Part C notebooks load the trained models and the unseen test dataset, generate predictions and calculate the required performance metrics.
+
+## Part C Documentation
+
+The supporting Part C documentation is stored in the repository root:
+
+* [Model1Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model1Performance.MD)
+* [Model2Performance.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Model2Performance.MD)
+* [Comparison.MD](https://github.com/Brondon-Lee/STADIOalot-Returns-Prediction/blob/main/Comparison.MD)
 
 # Repository Structure
 
