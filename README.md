@@ -400,3 +400,12 @@ Part C evaluated and compared the Logistic Regression and Random Forest models u
 Part D provides recommendations based on the results from Part C, including possible model improvements, adaptation to the requested STADIOalot data and comparison with the literature reviewed in Part A.
 
 The future objective is to apply the validated approach to appropriate STADIOalot data containing actual product-return outcomes, subject to data availability and approval.
+
+Part C – Final Presentation
+
+CAP182 SS3 Final Presentation
+
+The final presentation covers the work completed in SS1, SS2 and SS3, including the business problem, methodology, model development, results and recommendations.
+
+You tube link: https://youtu.be/QwynZ_nyb-I
+
